@@ -3,943 +3,512 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YellowSeac — Creative Technologist</title>
+  <title>YellowSeac — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===================== RESET ===================== */
+    /* ========== RESET ========== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ===================== TOKENS ===================== */
+    /* ========== TOKENS ========== */
     :root {
-      --color-void: #000000;
-      --color-bone-white: #ffffff;
-      --color-ash-gray: #9a9a9a;
-      --color-silver-mist: #bdbdbd;
-      --color-electric-iris: #8052ff;
-      --color-saffron-spark: #ffb829;
-      --color-deep-verdant: #15846e;
-
-      --font-main: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
-      --spacing-6: 6px;
-      --spacing-12: 12px;
-      --spacing-18: 18px;
-      --spacing-24: 24px;
-      --spacing-30: 30px;
-      --spacing-36: 36px;
-      --spacing-60: 60px;
-      --spacing-96: 96px;
-      --spacing-120: 120px;
-
-      --radius-buttons: 24px;
-      --radius-cards: 24px;
-      --page-max-width: 1280px;
+      --void: #000000;
+      --white: #ffffff;
+      --ash: #9a9a9a;
+      --silver: #bdbdbd;
+      --iris: #8052ff;
+      --saffron: #ffb829;
+      --verdant: #15846e;
+      --font: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --max-w: 1280px;
+      --radius: 24px;
     }
 
-    /* ===================== BASE ===================== */
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    /* ========== BASE ========== */
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: var(--void); color: var(--white); overflow-x: hidden; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-    body {
-      font-family: var(--font-main);
-      background: var(--color-void);
-      color: var(--color-bone-white);
-      overflow-x: hidden;
-      line-height: 1.5;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ===================== NAV ===================== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 48px;
-      background: transparent;
-      backdrop-filter: none;
-      transition: background 0.3s;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-logo-icon {
-      width: 28px;
-      height: 28px;
-    }
-
-    .nav-logo-text {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-bone-white);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-ash-gray);
-      transition: color 0.25s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--color-bone-white);
-    }
-
-    .nav-cta {
-      display: inline-flex;
-      align-items: center;
-      padding: 14px 28px;
-      background: var(--color-electric-iris);
-      color: var(--color-bone-white);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius-buttons);
-      cursor: pointer;
-      transition: opacity 0.25s;
-    }
-
-    .nav-cta:hover {
-      opacity: 0.85;
-    }
-
-    /* ===================== HERO ===================== */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 0 48px;
-      max-width: var(--page-max-width);
-      margin: 0 auto;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 600px;
-    }
-
-    .hero-label {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-saffron-spark);
-      margin-bottom: var(--spacing-24);
-    }
-
-    .hero-headline {
-      font-size: clamp(48px, 8vw, 113px);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--color-bone-white);
-      margin-bottom: var(--spacing-36);
-    }
-
-    .hero-body {
-      font-size: 18px;
-      font-weight: 200;
-      line-height: 1.6;
-      color: var(--color-silver-mist);
-      max-width: 480px;
-      margin-bottom: var(--spacing-36);
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      padding: 14px 32px;
-      background: var(--color-electric-iris);
-      color: var(--color-bone-white);
-      font-family: var(--font-main);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      border: none;
-      border-radius: var(--radius-buttons);
-      cursor: pointer;
-      transition: opacity 0.25s, transform 0.2s;
-    }
-
-    .btn-primary:hover {
-      opacity: 0.88;
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--color-ash-gray);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      transition: color 0.25s;
-    }
-
-    .btn-ghost:hover {
-      color: var(--color-bone-white);
-    }
-
-    /* Particle canvas */
-    #constellation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    /* ===================== SECTIONS (shared) ===================== */
-    section {
-      position: relative;
-      z-index: 2;
-      max-width: var(--page-max-width);
-      margin: 0 auto;
-      padding: 0 48px;
-    }
-
-    .section-gap {
-      padding-top: var(--spacing-120);
-      padding-bottom: var(--spacing-120);
-    }
-
-    .section-label {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-saffron-spark);
-      margin-bottom: var(--spacing-24);
-    }
-
-    .section-headline {
-      font-size: clamp(36px, 5vw, 78px);
-      font-weight: 400;
-      line-height: 1.08;
-      letter-spacing: -0.04em;
-      color: var(--color-bone-white);
-      margin-bottom: var(--spacing-36);
-    }
-
-    .section-body {
-      font-size: 18px;
-      font-weight: 200;
-      line-height: 1.65;
-      color: var(--color-silver-mist);
-      max-width: 560px;
-    }
-
-    /* ===================== PHILOSOPHY ===================== */
-    .philosophy {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 96px;
-      align-items: start;
-    }
-
-    .philosophy-right {
-      padding-top: 60px;
-    }
-
-    .philosophy-text {
-      font-size: 18px;
-      font-weight: 200;
-      line-height: 1.7;
-      color: var(--color-silver-mist);
-    }
-
-    .philosophy-text + .philosophy-text {
-      margin-top: var(--spacing-24);
-    }
-
-    .highlight {
-      color: var(--color-saffron-spark);
-      font-weight: 400;
-    }
-
-    /* ===================== DISCIPLINES ===================== */
-    .disciplines {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 36px;
-      margin-top: var(--spacing-60);
-    }
-
-    .discipline {
-      padding: 36px 0;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .discipline-number {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      color: var(--color-electric-iris);
-      margin-bottom: var(--spacing-18);
-    }
-
-    .discipline-title {
-      font-size: 27px;
-      font-weight: 400;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--color-bone-white);
-      margin-bottom: var(--spacing-18);
-    }
-
-    .discipline-desc {
-      font-size: 15px;
-      font-weight: 200;
-      line-height: 1.6;
-      color: var(--color-ash-gray);
-    }
-
-    /* ===================== WORK ===================== */
-    .work-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-top: var(--spacing-60);
-    }
-
-    .work-card {
-      position: relative;
-      aspect-ratio: 16 / 10;
-      border-radius: var(--radius-cards);
-      overflow: hidden;
-      cursor: pointer;
-      background: linear-gradient(135deg, rgba(128,82,255,0.08), rgba(21,132,110,0.06));
-      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .work-card:hover {
-      transform: scale(0.985);
-    }
-
-    .work-card-canvas {
-      width: 100%;
-      height: 100%;
-    }
-
-    .work-card-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 30px 36px;
-      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
-    }
-
-    .work-card-tag {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-electric-iris);
-      margin-bottom: 8px;
-    }
-
-    .work-card-title {
-      font-size: 24px;
-      font-weight: 400;
-      letter-spacing: -0.48px;
-      color: var(--color-bone-white);
-    }
-
-    /* ===================== MANIFESTO ===================== */
-    .manifesto-quote {
-      font-size: clamp(27px, 4vw, 48px);
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      color: var(--color-bone-white);
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .manifesto-quote .mq-highlight {
-      color: var(--color-electric-iris);
-    }
-
-    .manifesto-author {
-      text-align: center;
-      margin-top: var(--spacing-36);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-ash-gray);
-    }
-
-    /* ===================== CONTACT ===================== */
-    .contact {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 36px;
-      margin-top: var(--spacing-36);
-    }
-
-    .contact-link {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.025em;
-      text-transform: uppercase;
-      color: var(--color-ash-gray);
-      transition: color 0.25s;
-      position: relative;
-    }
-
-    .contact-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--color-electric-iris);
-      transition: width 0.3s;
-    }
-
-    .contact-link:hover {
-      color: var(--color-bone-white);
-    }
-
-    .contact-link:hover::after {
-      width: 100%;
-    }
-
-    /* ===================== FOOTER ===================== */
-    .footer {
-      position: relative;
-      z-index: 2;
-      max-width: var(--page-max-width);
-      margin: 0 auto;
-      padding: 36px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(255,255,255,0.04);
-    }
-
-    .footer-left {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--color-ash-gray);
-    }
-
-    .footer-right {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--color-ash-gray);
-    }
-
-    /* ===================== AMBIENT PARTICLES (CSS) ===================== */
-    .ambient-particle {
-      position: fixed;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.12;
-    }
-
-    /* ===================== SCROLLBAR ===================== */
+    /* ========== SCROLLBAR ========== */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--color-void); }
+    ::-webkit-scrollbar-track { background: var(--void); }
     ::-webkit-scrollbar-thumb { background: rgba(128,82,255,0.3); border-radius: 3px; }
 
-    /* ===================== RESPONSIVE ===================== */
+    /* ========== NAV ========== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 48px; background: transparent; transition: background 0.3s, backdrop-filter 0.3s;
+    }
+    .nav.scrolled { background: rgba(0,0,0,0.85); backdrop-filter: blur(12px); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 28px; height: 28px; }
+    .nav-logo-text { font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--white); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--ash); transition: color 0.25s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-cta { display: inline-flex; align-items: center; padding: 14px 28px; background: var(--iris); color: var(--white); font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity 0.25s; font-family: var(--font); }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ========== HERO ========== */
+    .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 0 48px; max-width: var(--max-w); margin: 0 auto; }
+    .hero-content { position: relative; z-index: 2; max-width: 600px; }
+    .hero-label { font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; }
+    .hero-headline { font-size: clamp(48px, 8vw, 113px); font-weight: 400; line-height: 1.05; letter-spacing: -0.04em; color: var(--white); margin-bottom: 36px; }
+    .hero-body { font-size: 18px; font-weight: 200; line-height: 1.6; color: var(--silver); max-width: 480px; margin-bottom: 36px; }
+    .hero-actions { display: flex; align-items: center; gap: 24px; }
+
+    /* ========== BUTTONS ========== */
+    .btn-primary { display: inline-flex; align-items: center; padding: 14px 32px; background: var(--iris); color: var(--white); font-family: var(--font); font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; border: none; border-radius: var(--radius); cursor: pointer; transition: opacity 0.25s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-ghost { font-size: 14px; font-weight: 400; color: var(--ash); text-decoration: underline; text-underline-offset: 4px; transition: color 0.25s; }
+    .btn-ghost:hover { color: var(--white); }
+
+    /* ========== CANVAS ========== */
+    #constellation { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+    /* ========== SECTION SHARED ========== */
+    .section { position: relative; z-index: 2; max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+    .section-gap { padding-top: 120px; padding-bottom: 120px; }
+    .section-label { font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; }
+    .section-headline { font-size: clamp(36px, 5vw, 78px); font-weight: 400; line-height: 1.08; letter-spacing: -0.04em; color: var(--white); margin-bottom: 36px; }
+    .section-body { font-size: 18px; font-weight: 200; line-height: 1.65; color: var(--silver); max-width: 560px; }
+
+    /* ========== ABOUT ========== */
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: start; }
+    .about-right { padding-top: 60px; }
+    .about-text { font-size: 18px; font-weight: 200; line-height: 1.7; color: var(--silver); }
+    .about-text + .about-text { margin-top: 24px; }
+    .highlight { color: var(--saffron); font-weight: 400; }
+
+    /* ========== FILTERS ========== */
+    .filters { display: flex; gap: 12px; margin-bottom: 48px; flex-wrap: wrap; }
+    .filter-btn { font-family: var(--font); font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--ash); background: none; border: 1px solid rgba(255,255,255,0.08); border-radius: 9999px; padding: 10px 24px; cursor: pointer; transition: all 0.25s; }
+    .filter-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+    .filter-btn.active { color: var(--white); background: var(--iris); border-color: var(--iris); }
+
+    /* ========== GALLERY ========== */
+    .gallery-grid { columns: 3; column-gap: 18px; }
+    .gallery-item { break-inside: avoid; margin-bottom: 18px; border-radius: var(--radius); overflow: hidden; position: relative; cursor: pointer; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .gallery-item.visible { opacity: 1; transform: translateY(0); }
+    .gallery-item.hidden { display: none; }
+    .gallery-item img { width: 100%; display: block; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); opacity: 0; transition: opacity 0.35s; }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-overlay-tag { font-size: 12px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--iris); margin-bottom: 6px; }
+    .gallery-overlay-title { font-size: 18px; font-weight: 400; color: var(--white); }
+
+    /* ========== VIDEO SECTION ========== */
+    .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .video-card { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: #111; }
+    .video-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
+    .video-card:hover img { transform: scale(1.04); }
+    .video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 64px; height: 64px; border-radius: 50%; background: rgba(128,82,255,0.9); display: flex; align-items: center; justify-content: center; transition: transform 0.25s, background 0.25s; }
+    .video-card:hover .video-play { transform: translate(-50%, -50%) scale(1.1); background: var(--iris); }
+    .video-play svg { width: 24px; height: 24px; fill: var(--white); margin-left: 3px; }
+    .video-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%); }
+    .video-info-tag { font-size: 12px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--iris); margin-bottom: 6px; }
+    .video-info-title { font-size: 20px; font-weight: 400; color: var(--white); }
+
+    /* ========== LIGHTBOX ========== */
+    .lightbox { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.35s, visibility 0.35s; }
+    .lightbox.open { opacity: 1; visibility: visible; }
+    .lightbox-img { max-width: 85vw; max-height: 85vh; border-radius: 12px; object-fit: contain; transform: scale(0.92); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+    .lightbox.open .lightbox-img { transform: scale(1); }
+    .lightbox-close { position: absolute; top: 24px; right: 36px; width: 44px; height: 44px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .lightbox-close svg { width: 28px; height: 28px; stroke: var(--ash); transition: stroke 0.25s; }
+    .lightbox-close:hover svg { stroke: var(--white); }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border: none; background: rgba(255,255,255,0.06); border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.25s; }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.12); }
+    .lightbox-nav svg { width: 20px; height: 20px; stroke: var(--white); }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+    .lightbox-caption { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); text-align: center; }
+    .lightbox-caption-title { font-size: 18px; font-weight: 400; color: var(--white); }
+    .lightbox-caption-tag { font-size: 12px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--iris); margin-bottom: 6px; }
+
+    /* ========== CONTACT ========== */
+    .contact { text-align: center; max-width: 640px; margin: 0 auto; }
+    .contact-links { display: flex; justify-content: center; gap: 36px; margin-top: 36px; }
+    .contact-link { font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--ash); transition: color 0.25s; position: relative; }
+    .contact-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--iris); transition: width 0.3s; }
+    .contact-link:hover { color: var(--white); }
+    .contact-link:hover::after { width: 100%; }
+
+    /* ========== FOOTER ========== */
+    .footer { position: relative; z-index: 2; max-width: var(--max-w); margin: 0 auto; padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.04); }
+    .footer span { font-size: 12px; font-weight: 400; color: var(--ash); }
+
+    /* ========== RESPONSIVE ========== */
     @media (max-width: 900px) {
       .nav { padding: 18px 24px; }
       .nav-links { display: none; }
-      .hero { padding: 0 24px; }
+      .hero, .section { padding: 0 24px; }
       .hero-content { max-width: 100%; }
-      section { padding: 0 24px; }
-      .philosophy { grid-template-columns: 1fr; gap: 48px; }
-      .philosophy-right { padding-top: 0; }
-      .disciplines { grid-template-columns: 1fr; }
-      .work-grid { grid-template-columns: 1fr; }
-      .section-gap { padding-top: var(--spacing-96); padding-bottom: var(--spacing-96); }
+      .about { grid-template-columns: 1fr; gap: 48px; }
+      .about-right { padding-top: 0; }
+      .gallery-grid { columns: 2; }
+      .video-grid { grid-template-columns: 1fr; }
+      .section-gap { padding-top: 96px; padding-bottom: 96px; }
       .footer { padding: 24px; flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 540px) {
+      .gallery-grid { columns: 1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ==================== CONSTELLATION CANVAS ==================== -->
   <canvas id="constellation"></canvas>
 
-  <!-- ==================== NAV ==================== -->
-  <nav class="nav">
+  <!-- NAV -->
+  <nav class="nav" id="nav">
     <a href="#" class="nav-logo">
-      <svg class="nav-logo-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 2 L26 24 L2 24 Z" fill="url(#logoGrad)" stroke="none"/>
-        <defs>
-          <linearGradient id="logoGrad" x1="14" y1="2" x2="14" y2="24" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#8052ff"/>
-            <stop offset="100%" stop-color="#15846e"/>
-          </linearGradient>
-        </defs>
+      <svg class="nav-logo-icon" viewBox="0 0 28 28" fill="none">
+        <path d="M14 2 L26 24 L2 24 Z" fill="url(#lg)"/>
+        <defs><linearGradient id="lg" x1="14" y1="2" x2="14" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#8052ff"/><stop offset="1" stop-color="#15846e"/></linearGradient></defs>
       </svg>
       <span class="nav-logo-text">YellowSeac</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#philosophy" class="active">Philosophy</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#manifesto">Manifesto</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#video">Video</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get In Touch</button>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</button>
   </nav>
 
-  <!-- ==================== HERO ==================== -->
+  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-content">
-      <p class="hero-label">Creative Technologist &amp; Design Engineer</p>
-      <h1 class="hero-headline">Where craft meets code.</h1>
+      <p class="hero-label">Photography &amp; Visual Storytelling</p>
+      <h1 class="hero-headline">Capturing moments that matter.</h1>
       <p class="hero-body">
-        I build digital experiences at the intersection of design precision and engineering depth.
-        Every pixel intentional. Every interaction considered.
+        Through the lens, I explore light, form, and emotion.
+        Every frame is a conversation between seeing and feeling.
       </p>
       <div class="hero-actions">
-        <button class="btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Work</button>
-        <a href="#philosophy" class="btn-ghost">Read philosophy</a>
+        <button class="btn-primary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
+        <a href="#about" class="btn-ghost">About me</a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== PHILOSOPHY ==================== -->
-  <section class="section-gap" id="philosophy">
-    <div class="philosophy">
+  <!-- ABOUT -->
+  <section class="section section-gap" id="about">
+    <div class="about">
       <div>
-        <p class="section-label">Philosophy</p>
-        <h2 class="section-headline">Less noise.<br>More signal.</h2>
+        <p class="section-label">About</p>
+        <h2 class="section-headline">Seeing is<br>thinking.</h2>
       </div>
-      <div class="philosophy-right">
-        <p class="philosophy-text">
-          I believe the best digital work emerges from <span class="highlight">restraint</span> —
-          the discipline to remove until only essence remains. Every project begins with subtraction:
-          what can we eliminate to let the core idea breathe?
+      <div class="about-right">
+        <p class="about-text">
+          I'm a visual storyteller drawn to the space between
+          <span class="highlight">documentary and art</span>.
+          My work explores urban landscapes, human moments, and the quiet drama of everyday light.
         </p>
-        <p class="philosophy-text">
-          Technology should feel invisible. When the interface disappears and only the experience remains,
-          that's when craft becomes <span class="highlight">art</span>. I work at that threshold —
-          where engineering rigor meets aesthetic intuition.
+        <p class="about-text">
+          Every project starts with a question: what does this scene want to say?
+          I listen first, then compose. The camera is just the instrument —
+          the real work is in <span class="highlight">attention</span>.
         </p>
-        <p class="philosophy-text">
-          My toolkit spans systems design, creative coding, and brand engineering.
-          I don't separate design from development — they're the same discipline,
-          expressed through different mediums.
+        <p class="about-text">
+          Based in China. Open to commissions, collaborations, and editorial assignments worldwide.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== DISCIPLINES ==================== -->
-  <section class="section-gap" style="padding-top: 0;">
-    <p class="section-label">Disciplines</p>
-    <h2 class="section-headline">What I do.</h2>
-    <div class="disciplines">
-      <div class="discipline">
-        <p class="discipline-number">01</p>
-        <h3 class="discipline-title">Design Systems</h3>
-        <p class="discipline-desc">
-          Scalable visual languages that unify product experiences.
-          Tokens, components, and documentation that grow with your team.
-        </p>
+  <!-- GALLERY -->
+  <section class="section section-gap" id="gallery">
+    <p class="section-label">Gallery</p>
+    <h2 class="section-headline">Selected work.</h2>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="photo">Photography</button>
+      <button class="filter-btn" data-filter="street">Street</button>
+      <button class="filter-btn" data-filter="landscape">Landscape</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- 12 placeholder items — replace src with real photos -->
+      <div class="gallery-item" data-cat="photo" data-title="Golden Hour" data-tag="Photography">
+        <img data-src="https://picsum.photos/seed/y1/600/800" alt="Golden Hour" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Photography</p><p class="gallery-overlay-title">Golden Hour</p></div>
       </div>
-      <div class="discipline">
-        <p class="discipline-number">02</p>
-        <h3 class="discipline-title">Creative Coding</h3>
-        <p class="discipline-desc">
-          Generative visuals, interactive installations, and procedural art.
-          Code as a creative medium — not just an implementation tool.
-        </p>
+      <div class="gallery-item" data-cat="street" data-title="Urban Rhythm" data-tag="Street">
+        <img data-src="https://picsum.photos/seed/y2/600/400" alt="Urban Rhythm" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Street</p><p class="gallery-overlay-title">Urban Rhythm</p></div>
       </div>
-      <div class="discipline">
-        <p class="discipline-number">03</p>
-        <h3 class="discipline-title">Brand Engineering</h3>
-        <p class="discipline-desc">
-          Identity systems that live in code. Motion languages, type systems,
-          and color architectures designed for digital-first brands.
-        </p>
+      <div class="gallery-item" data-cat="landscape" data-title="Silent Peaks" data-tag="Landscape">
+        <img data-src="https://picsum.photos/seed/y3/600/900" alt="Silent Peaks" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Landscape</p><p class="gallery-overlay-title">Silent Peaks</p></div>
+      </div>
+      <div class="gallery-item" data-cat="street" data-title="Neon Alley" data-tag="Street">
+        <img data-src="https://picsum.photos/seed/y4/600/600" alt="Neon Alley" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Street</p><p class="gallery-overlay-title">Neon Alley</p></div>
+      </div>
+      <div class="gallery-item" data-cat="photo" data-title="Still Life No.7" data-tag="Photography">
+        <img data-src="https://picsum.photos/seed/y5/600/750" alt="Still Life No.7" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Photography</p><p class="gallery-overlay-title">Still Life No.7</p></div>
+      </div>
+      <div class="gallery-item" data-cat="landscape" data-title="Coastal Fog" data-tag="Landscape">
+        <img data-src="https://picsum.photos/seed/y6/600/400" alt="Coastal Fog" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Landscape</p><p class="gallery-overlay-title">Coastal Fog</p></div>
+      </div>
+      <div class="gallery-item" data-cat="street" data-title="Crossing" data-tag="Street">
+        <img data-src="https://picsum.photos/seed/y7/600/850" alt="Crossing" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Street</p><p class="gallery-overlay-title">Crossing</p></div>
+      </div>
+      <div class="gallery-item" data-cat="photo" data-title="Shadows &amp; Lines" data-tag="Photography">
+        <img data-src="https://picsum.photos/seed/y8/600/500" alt="Shadows and Lines" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Photography</p><p class="gallery-overlay-title">Shadows &amp; Lines</p></div>
+      </div>
+      <div class="gallery-item" data-cat="landscape" data-title="Desert Light" data-tag="Landscape">
+        <img data-src="https://picsum.photos/seed/y9/600/700" alt="Desert Light" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Landscape</p><p class="gallery-overlay-title">Desert Light</p></div>
+      </div>
+      <div class="gallery-item" data-cat="street" data-title="Rain Reflections" data-tag="Street">
+        <img data-src="https://picsum.photos/seed/y10/600/450" alt="Rain Reflections" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Street</p><p class="gallery-overlay-title">Rain Reflections</p></div>
+      </div>
+      <div class="gallery-item" data-cat="photo" data-title="Morning Geometry" data-tag="Photography">
+        <img data-src="https://picsum.photos/seed/y11/600/600" alt="Morning Geometry" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Photography</p><p class="gallery-overlay-title">Morning Geometry</p></div>
+      </div>
+      <div class="gallery-item" data-cat="landscape" data-title="Above the Clouds" data-tag="Landscape">
+        <img data-src="https://picsum.photos/seed/y12/600/800" alt="Above the Clouds" loading="lazy">
+        <div class="gallery-overlay"><p class="gallery-overlay-tag">Landscape</p><p class="gallery-overlay-title">Above the Clouds</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== WORK ==================== -->
-  <section class="section-gap" id="work">
-    <p class="section-label">Selected Work</p>
-    <h2 class="section-headline">Recent projects.</h2>
-    <div class="work-grid">
-      <div class="work-card">
-        <canvas class="work-card-canvas" data-type="nebula"></canvas>
-        <div class="work-card-info">
-          <p class="work-card-tag">Generative Art</p>
-          <p class="work-card-title">Nebula Protocol</p>
-        </div>
+  <!-- VIDEO -->
+  <section class="section section-gap" id="video">
+    <p class="section-label">Video</p>
+    <h2 class="section-headline">Motion work.</h2>
+    <div class="video-grid">
+      <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://picsum.photos/seed/v1/800/450" alt="Video thumbnail">
+        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+        <div class="video-info"><p class="video-info-tag">Short Film</p><p class="video-info-title">Urban Solitude</p></div>
       </div>
-      <div class="work-card">
-        <canvas class="work-card-canvas" data-type="wave"></canvas>
-        <div class="work-card-info">
-          <p class="work-card-tag">Interactive</p>
-          <p class="work-card-title">Tidal Memory</p>
-        </div>
+      <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://picsum.photos/seed/v2/800/450" alt="Video thumbnail">
+        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+        <div class="video-info"><p class="video-info-tag">Documentary</p><p class="video-info-title">Between Frames</p></div>
       </div>
-      <div class="work-card">
-        <canvas class="work-card-canvas" data-type="grid"></canvas>
-        <div class="work-card-info">
-          <p class="work-card-tag">Design System</p>
-          <p class="work-card-title">Chroma Framework</p>
-        </div>
+      <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://picsum.photos/seed/v3/800/450" alt="Video thumbnail">
+        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+        <div class="video-info"><p class="video-info-tag">Music Video</p><p class="video-info-title">Chromatic Drift</p></div>
       </div>
-      <div class="work-card">
-        <canvas class="work-card-canvas" data-type="particle"></canvas>
-        <div class="work-card-info">
-          <p class="work-card-tag">Brand</p>
-          <p class="work-card-title">Signal &amp; Noise</p>
-        </div>
+      <div class="video-card" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+        <img src="https://picsum.photos/seed/v4/800/450" alt="Video thumbnail">
+        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+        <div class="video-info"><p class="video-info-tag">Commercial</p><p class="video-info-title">Still in Motion</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== MANIFESTO ==================== -->
-  <section class="section-gap" id="manifesto">
-    <div class="contact" style="max-width: 900px;">
-      <p class="section-label">Manifesto</p>
-      <blockquote class="manifesto-quote">
-        "The future belongs to those who can hold
-        <span class="mq-highlight">design thinking</span>
-        and
-        <span class="mq-highlight">systems thinking</span>
-        in the same breath."
-      </blockquote>
-      <p class="manifesto-author">— YellowSeac</p>
-    </div>
-  </section>
-
-  <!-- ==================== CONTACT ==================== -->
-  <section class="section-gap" id="contact">
+  <!-- CONTACT -->
+  <section class="section section-gap" id="contact">
     <div class="contact">
       <p class="section-label">Contact</p>
-      <h2 class="section-headline">Let's build something.</h2>
-      <p class="section-body" style="margin: 0 auto; text-align: center;">
-        Open to collaborations, commissions, and conversations about
-        the future of digital craft.
+      <h2 class="section-headline">Let's create together.</h2>
+      <p class="section-body" style="margin:0 auto;text-align:center;">
+        Open to commissions, editorial work, exhibitions, and creative collaborations.
       </p>
       <div class="contact-links">
         <a href="mailto:hello@yellowseac.com" class="contact-link">Email</a>
-        <a href="#" class="contact-link">Twitter</a>
-        <a href="#" class="contact-link">GitHub</a>
-        <a href="#" class="contact-link">Dribbble</a>
+        <a href="#" class="contact-link">Instagram</a>
+        <a href="#" class="contact-link">Behance</a>
+        <a href="#" class="contact-link">Vimeo</a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- FOOTER -->
   <footer class="footer">
-    <span class="footer-left">&copy; 2026 YellowSeac</span>
-    <span class="footer-right">Designed &amp; built with intention</span>
+    <span>&copy; 2026 YellowSeac</span>
+    <span>All rights reserved</span>
   </footer>
 
-  <!-- ==================== SCRIPTS ==================== -->
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img class="lightbox-img" id="lbImg" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lbNext">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox-caption">
+      <p class="lightbox-caption-tag" id="lbTag"></p>
+      <p class="lightbox-caption-title" id="lbTitle"></p>
+    </div>
+  </div>
+
   <script>
-    // ===================== CONSTELLATION =====================
+    // ===== CONSTELLATION =====
     (() => {
-      const canvas = document.getElementById('constellation');
-      const ctx = canvas.getContext('2d');
-      let W, H, particles = [], mouse = { x: -9999, y: -9999 };
-
-      const COLORS = [
-        '#8052ff', '#8052ff', '#8052ff',
-        '#ffb829', '#ffb829',
-        '#15846e',
-        '#a855f7', '#6366f1', '#ec4899', '#3b82f6', '#14b8a6'
-      ];
-
-      function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
-
-      class Particle {
-        constructor() {
-          this.reset();
-        }
+      const c = document.getElementById('constellation'), ctx = c.getContext('2d');
+      let W, H, pts = [], mx = -9999, my = -9999;
+      const COLORS = ['#8052ff','#8052ff','#ffb829','#15846e','#a855f7','#6366f1','#ec4899','#3b82f6'];
+      function resize() { W = c.width = innerWidth; H = c.height = innerHeight; }
+      class Pt {
+        constructor() { this.reset(); }
         reset() {
-          this.x = Math.random() * W;
-          this.y = Math.random() * H;
-          this.vx = (Math.random() - 0.5) * 0.3;
-          this.vy = (Math.random() - 0.5) * 0.3;
-          this.size = 1 + Math.random() * 1.5;
-          this.color = COLORS[Math.floor(Math.random() * COLORS.length)];
-          this.alpha = 0.15 + Math.random() * 0.5;
-          this.targetAlpha = this.alpha;
-          this.rotation = Math.random() * Math.PI * 2;
-          this.rotSpeed = (Math.random() - 0.5) * 0.008;
+          this.x = Math.random()*W; this.y = Math.random()*H;
+          this.vx = (Math.random()-0.5)*0.3; this.vy = (Math.random()-0.5)*0.3;
+          this.sz = 1+Math.random()*1.5; this.c = COLORS[Math.random()*COLORS.length|0];
+          this.a = 0.15+Math.random()*0.5; this.ta = this.a;
+          this.r = Math.random()*Math.PI*2; this.rs = (Math.random()-0.5)*0.008;
         }
         update() {
-          // Subtle mouse attraction
-          const dx = mouse.x - this.x;
-          const dy = mouse.y - this.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 250 && dist > 0) {
-            const force = (250 - dist) / 250 * 0.0008;
-            this.vx += dx * force;
-            this.vy += dy * force;
-            this.targetAlpha = Math.min(1, this.alpha + 0.3);
-          } else {
-            this.targetAlpha = this.alpha;
-          }
-
-          this.x += this.vx;
-          this.y += this.vy;
-          this.vx *= 0.995;
-          this.vy *= 0.995;
-          this.rotation += this.rotSpeed;
-
-          // Wrap around
-          if (this.x < -20) this.x = W + 20;
-          if (this.x > W + 20) this.x = -20;
-          if (this.y < -20) this.y = H + 20;
-          if (this.y > H + 20) this.y = -20;
+          const dx=mx-this.x, dy=my-this.y, d=Math.sqrt(dx*dx+dy*dy);
+          if(d<250&&d>0){const f=(250-d)/250*0.0008;this.vx+=dx*f;this.vy+=dy*f;this.ta=Math.min(1,this.a+0.3);}
+          else this.ta=this.a;
+          this.x+=this.vx; this.y+=this.vy; this.vx*=0.995; this.vy*=0.995; this.r+=this.rs;
+          if(this.x<-20)this.x=W+20; if(this.x>W+20)this.x=-20;
+          if(this.y<-20)this.y=H+20; if(this.y>H+20)this.y=-20;
         }
         draw() {
-          ctx.save();
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.rotation);
-          ctx.globalAlpha = this.targetAlpha;
-          ctx.strokeStyle = this.color;
-          ctx.lineWidth = 0.8;
-          const s = this.size;
-          ctx.beginPath();
-          ctx.moveTo(0, -s * 1.2);
-          ctx.lineTo(s, s * 0.8);
-          ctx.lineTo(-s, s * 0.8);
-          ctx.closePath();
-          ctx.stroke();
+          ctx.save(); ctx.translate(this.x,this.y); ctx.rotate(this.r);
+          ctx.globalAlpha=this.ta; ctx.strokeStyle=this.c; ctx.lineWidth=0.8;
+          const s=this.sz;
+          ctx.beginPath(); ctx.moveTo(0,-s*1.2); ctx.lineTo(s,s*0.8); ctx.lineTo(-s,s*0.8); ctx.closePath(); ctx.stroke();
           ctx.restore();
         }
       }
-
-      function init() {
-        resize();
-        const count = Math.min(Math.floor((W * H) / 3200), 400);
-        particles = [];
-        for (let i = 0; i < count; i++) {
-          particles.push(new Particle());
-        }
+      function init(){resize();pts=[];for(let i=0;i<Math.min((W*H)/3200|0,400);i++)pts.push(new Pt());}
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        for(let i=0;i<pts.length;i++){const a=pts[i];for(let j=i+1;j<pts.length;j++){const b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){ctx.beginPath();ctx.strokeStyle=a.c;ctx.globalAlpha=(1-d/120)*0.06;ctx.lineWidth=0.5;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}}
+        ctx.globalAlpha=1; for(const p of pts){p.update();p.draw();} requestAnimationFrame(draw);
       }
+      addEventListener('resize',()=>{resize();init();});
+      addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+      addEventListener('mouseleave',()=>{mx=my=-9999;});
+      init(); draw();
+    })();
 
-      // Draw connections between nearby particles
-      function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-          for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-              ctx.beginPath();
-              ctx.strokeStyle = particles[i].color;
-              ctx.globalAlpha = (1 - dist / 120) * 0.06;
-              ctx.lineWidth = 0.5;
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
+    // ===== LAZY LOAD =====
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const img = e.target;
+          img.src = img.dataset.src;
+          img.onload = () => img.parentElement.classList.add('visible');
+          observer.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+    document.querySelectorAll('.gallery-item img[data-src]').forEach(img => observer.observe(img));
+
+    // ===== FILTERS =====
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.gallery-item');
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.filter;
+        items.forEach(item => {
+          if (cat === 'all' || item.dataset.cat === cat) {
+            item.classList.remove('hidden');
+            item.classList.add('visible');
+          } else {
+            item.classList.add('hidden');
+            item.classList.remove('visible');
           }
-        }
-        ctx.globalAlpha = 1;
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, W, H);
-        drawConnections();
-        for (const p of particles) {
-          p.update();
-          p.draw();
-        }
-        requestAnimationFrame(animate);
-      }
-
-      window.addEventListener('resize', () => { resize(); init(); });
-      window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-      window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-
-      init();
-      animate();
-    })();
-
-    // ===================== WORK CARD CANVASES =====================
-    (() => {
-      const cards = document.querySelectorAll('.work-card-canvas');
-
-      cards.forEach(canvas => {
-        const ctx = canvas.getContext('2d');
-        const type = canvas.dataset.type;
-        let W, H, frame = 0;
-
-        function resize() {
-          const rect = canvas.parentElement.getBoundingClientRect();
-          W = canvas.width = rect.width;
-          H = canvas.height = rect.height;
-        }
-
-        const renderers = {
-          nebula() {
-            ctx.fillStyle = 'rgba(0,0,0,0.04)';
-            ctx.fillRect(0, 0, W, H);
-            const t = frame * 0.003;
-            for (let i = 0; i < 6; i++) {
-              const x = W * 0.5 + Math.sin(t + i * 1.2) * W * 0.25;
-              const y = H * 0.5 + Math.cos(t * 0.7 + i * 0.9) * H * 0.2;
-              const grad = ctx.createRadialGradient(x, y, 0, x, y, 120);
-              grad.addColorStop(0, `hsla(${260 + i * 20}, 80%, 60%, 0.08)`);
-              grad.addColorStop(1, 'transparent');
-              ctx.fillStyle = grad;
-              ctx.fillRect(0, 0, W, H);
-            }
-          },
-          wave() {
-            ctx.fillStyle = 'rgba(0,0,0,0.06)';
-            ctx.fillRect(0, 0, W, H);
-            const t = frame * 0.015;
-            ctx.strokeStyle = '#8052ff';
-            ctx.lineWidth = 1;
-            for (let j = 0; j < 5; j++) {
-              ctx.beginPath();
-              ctx.globalAlpha = 0.15 + j * 0.05;
-              for (let x = 0; x < W; x += 3) {
-                const y = H * 0.5 + Math.sin(x * 0.008 + t + j * 0.8) * (40 + j * 15) +
-                           Math.sin(x * 0.015 - t * 0.5) * 20;
-                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-              }
-              ctx.stroke();
-            }
-            ctx.globalAlpha = 1;
-          },
-          grid() {
-            ctx.fillStyle = 'rgba(0,0,0,0.05)';
-            ctx.fillRect(0, 0, W, H);
-            const t = frame * 0.008;
-            const cols = 20, rows = 14;
-            const cellW = W / cols, cellH = H / rows;
-            for (let r = 0; r < rows; r++) {
-              for (let c = 0; c < cols; c++) {
-                const cx = c * cellW + cellW / 2;
-                const cy = r * cellH + cellH / 2;
-                const d = Math.sin(c * 0.4 + r * 0.3 + t) * 0.5 + 0.5;
-                const size = 1 + d * 3;
-                ctx.fillStyle = d > 0.6 ? '#8052ff' : '#15846e';
-                ctx.globalAlpha = 0.1 + d * 0.4;
-                ctx.fillRect(cx - size / 2, cy - size / 2, size, size);
-              }
-            }
-            ctx.globalAlpha = 1;
-          },
-          particle() {
-            ctx.fillStyle = 'rgba(0,0,0,0.03)';
-            ctx.fillRect(0, 0, W, H);
-            const t = frame * 0.005;
-            for (let i = 0; i < 30; i++) {
-              const angle = (i / 30) * Math.PI * 2 + t;
-              const r = 60 + Math.sin(t * 2 + i) * 30;
-              const x = W * 0.5 + Math.cos(angle) * r;
-              const y = H * 0.5 + Math.sin(angle) * r * 0.6;
-              ctx.fillStyle = COLORS[i % COLORS.length];
-              ctx.globalAlpha = 0.3 + Math.sin(t + i) * 0.2;
-              ctx.beginPath();
-              ctx.arc(x, y, 1.5, 0, Math.PI * 2);
-              ctx.fill();
-            }
-            ctx.globalAlpha = 1;
-          }
-        };
-
-        const COLORS = ['#8052ff', '#ffb829', '#15846e', '#ec4899', '#6366f1'];
-
-        function animate() {
-          frame++;
-          renderers[type]?.();
-          requestAnimationFrame(animate);
-        }
-
-        resize();
-        // Fill initial black
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, W, H);
-        animate();
-        window.addEventListener('resize', resize);
+        });
       });
-    })();
+    });
 
-    // ===================== SCROLL-BASED NAV BG =====================
-    (() => {
-      const nav = document.querySelector('.nav');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 80) {
-          nav.style.background = 'rgba(0,0,0,0.85)';
-          nav.style.backdropFilter = 'blur(12px)';
-        } else {
-          nav.style.background = 'transparent';
-          nav.style.backdropFilter = 'none';
-        }
-      });
-    })();
+    // ===== LIGHTBOX =====
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbTitle = document.getElementById('lbTitle');
+    const lbTag = document.getElementById('lbTag');
+    let lbIndex = 0, visibleItems = [];
 
-    // ===================== SMOOTH SCROLL =====================
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    function getVisibleItems() {
+      return Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+    }
+
+    function openLB(idx) {
+      visibleItems = getVisibleItems();
+      lbIndex = idx;
+      showLB();
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLB() {
+      const item = visibleItems[lbIndex];
+      if (!item) return;
+      lbImg.src = item.querySelector('img').dataset.src || item.querySelector('img').src;
+      lbTitle.textContent = item.dataset.title;
+      lbTag.textContent = item.dataset.tag;
+    }
+
+    function closeLB() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function navLB(dir) {
+      lbIndex = (lbIndex + dir + visibleItems.length) % visibleItems.length;
+      showLB();
+    }
+
+    items.forEach((item, i) => item.addEventListener('click', () => openLB(i)));
+    document.getElementById('lbClose').addEventListener('click', closeLB);
+    document.getElementById('lbPrev').addEventListener('click', () => navLB(-1));
+    document.getElementById('lbNext').addEventListener('click', () => navLB(1));
+    lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLB();
+      if (e.key === 'ArrowLeft') navLB(-1);
+      if (e.key === 'ArrowRight') navLB(1);
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    lb.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) navLB(diff > 0 ? 1 : -1);
+    });
+
+    // ===== VIDEO EMBED =====
+    document.querySelectorAll('.video-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const url = card.dataset.video;
+        const iframe = document.createElement('iframe');
+        iframe.src = url + '?autoplay=1';
+        iframe.style.cssText = 'width:100%;height:100%;border:none;';
+        iframe.allow = 'autoplay; encrypted-media';
+        iframe.allowFullscreen = true;
+        card.innerHTML = '';
+        card.appendChild(iframe);
       });
+    });
+
+    // ===== NAV SCROLL =====
+    const nav = document.getElementById('nav');
+    addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', scrollY > 80);
     });
   </script>
 
