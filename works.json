@@ -1,12 +1,59 @@
 {
-  "works": [],
+  "works": [
+    {
+      "id": "w1",
+      "title": "无题 I",
+      "category": "photo",
+      "tag": "摄影",
+      "image": "images/photo-01.jpg",
+      "desc": ""
+    },
+    {
+      "id": "w2",
+      "title": "无题 II",
+      "category": "photo",
+      "tag": "摄影",
+      "image": "images/photo-02.jpg",
+      "desc": ""
+    },
+    {
+      "id": "w3",
+      "title": "无题 III",
+      "category": "photo",
+      "tag": "摄影",
+      "image": "images/photo-03.jpg",
+      "desc": ""
+    }
+  ],
   "videos": [
     {
-      "id": "v1792305033572",
-      "title": "11",
-      "tag": "",
+      "id": "v1",
+      "title": "城市独白",
+      "tag": "短片",
       "thumb": "",
-      "url": "温馨室内男子动感舞蹈视频.mp4"
+      "url": ""
+    },
+    {
+      "id": "v2",
+      "title": "帧与帧之间",
+      "tag": "纪录片",
+      "thumb": "",
+      "url": ""
+    },
+    {
+      "id": "v3",
+      "title": "色彩漂流",
+      "tag": "音乐视频",
+      "thumb": "",
+      "url": ""
+    },
+    {
+      "id": "v4",
+      "title": "静止中的运动",
+      "tag": "商业",
+      "thumb": "",
+      "url": ""
     }
-  ]
+  ],
+  "lastUpdated": "2026-10-18"
 }
