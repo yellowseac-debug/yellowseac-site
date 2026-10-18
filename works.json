@@ -25,5 +25,13 @@
       "desc": ""
     }
   ],
-  "videos": []
+  "videos": [
+    {
+      "id": "v1",
+      "title": "室内舞蹈",
+      "tag": "舞蹈",
+      "thumb": "images/video-thumb-01.jpg",
+      "url": "images/温馨室内男子动感舞蹈视频.mp4"
+    }
+  ]
 }

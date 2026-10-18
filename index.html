@@ -443,18 +443,35 @@
         card.addEventListener('click', () => {
           const url = card.dataset.video;
           if (!url) return;
-          const iframe = document.createElement('iframe');
-          // Handle Bilibili URLs differently
-          if (url.includes('bilibili.com')) {
+
+          if (url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.mov')) {
+            // Local video file
+            const video = document.createElement('video');
+            video.src = url;
+            video.controls = true;
+            video.autoplay = true;
+            video.style.cssText = 'width:100%;height:100%;object-fit:contain;background:#000;';
+            card.innerHTML = '';
+            card.appendChild(video);
+          } else if (url.includes('bilibili.com')) {
+            // Bilibili embed
+            const iframe = document.createElement('iframe');
             iframe.src = url;
+            iframe.style.cssText = 'width:100%;height:100%;border:none;';
+            iframe.allow = 'autoplay; encrypted-media';
+            iframe.allowFullscreen = true;
+            card.innerHTML = '';
+            card.appendChild(iframe);
           } else {
+            // YouTube embed
+            const iframe = document.createElement('iframe');
             iframe.src = url + (url.includes('?') ? '&' : '?') + 'autoplay=1';
+            iframe.style.cssText = 'width:100%;height:100%;border:none;';
+            iframe.allow = 'autoplay; encrypted-media';
+            iframe.allowFullscreen = true;
+            card.innerHTML = '';
+            card.appendChild(iframe);
           }
-          iframe.style.cssText = 'width:100%;height:100%;border:none;';
-          iframe.allow = 'autoplay; encrypted-media';
-          iframe.allowFullscreen = true;
-          card.innerHTML = '';
-          card.appendChild(iframe);
         });
       });
     }
