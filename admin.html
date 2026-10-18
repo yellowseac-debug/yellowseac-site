@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YellowSeac — 管理后台</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --void: #000000; --white: #ffffff; --ash: #9a9a9a; --silver: #bdbdbd;
+      --iris: #8052ff; --saffron: #ffb829; --verdant: #15846e;
+      --font: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --radius: 24px; --card-bg: #111; --card-border: #222;
+    }
+    html { -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: var(--void); color: var(--white); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 24px 48px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .nav-left { display: flex; align-items: center; gap: 16px; }
+    .nav-left h1 { font-size: 18px; font-weight: 400; letter-spacing: -0.02em; }
+    .nav-left span { font-size: 12px; color: var(--ash); background: rgba(128,82,255,0.15); padding: 4px 10px; border-radius: 9999px; }
+    .nav-right { display: flex; gap: 12px; }
+
+    /* BUTTONS */
+    .btn { font-family: var(--font); font-size: 14px; font-weight: 600; letter-spacing: 0.025em; border: none; border-radius: var(--radius); cursor: pointer; padding: 10px 24px; transition: all 0.2s; }
+    .btn-primary { background: var(--iris); color: var(--white); }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-ghost { background: none; color: var(--ash); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+    .btn-danger { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .btn-danger:hover { background: rgba(239,68,68,0.25); }
+    .btn-sm { padding: 6px 16px; font-size: 12px; }
+
+    /* LAYOUT */
+    .main { max-width: 960px; margin: 0 auto; padding: 36px 48px; }
+    .section { margin-bottom: 48px; }
+    .section-title { font-size: 14px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--saffron); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
+
+    /* AUTH */
+    .auth-bar { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 24px; margin-bottom: 36px; display: flex; align-items: center; gap: 16px; }
+    .auth-bar input { flex: 1; background: #0a0a0a; border: 1px solid #333; border-radius: 12px; padding: 12px 16px; color: var(--white); font-family: var(--font); font-size: 14px; outline: none; }
+    .auth-bar input:focus { border-color: var(--iris); }
+    .auth-status { font-size: 12px; color: var(--ash); margin-left: 12px; }
+    .auth-status.ok { color: var(--verdant); }
+
+    /* CARDS */
+    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 16px; transition: border-color 0.2s; }
+    .card:hover { border-color: #333; }
+    .card-thumb { width: 72px; height: 72px; border-radius: 12px; object-fit: cover; background: #1a1a1a; flex-shrink: 0; }
+    .card-thumb-placeholder { width: 72px; height: 72px; border-radius: 12px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--ash); font-size: 12px; }
+    .card-info { flex: 1; min-width: 0; }
+    .card-title { font-size: 16px; font-weight: 400; margin-bottom: 4px; }
+    .card-meta { font-size: 12px; color: var(--ash); }
+    .card-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.25s; }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal { background: #111; border: 1px solid #222; border-radius: 20px; width: 480px; max-width: 90vw; max-height: 85vh; overflow-y: auto; padding: 32px; transform: scale(0.95); transition: transform 0.25s; }
+    .modal-overlay.open .modal { transform: scale(1); }
+    .modal h2 { font-size: 20px; font-weight: 400; margin-bottom: 24px; }
+    .modal label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.025em; text-transform: uppercase; color: var(--ash); margin-bottom: 8px; margin-top: 16px; }
+    .modal label:first-of-type { margin-top: 0; }
+    .modal input, .modal select, .modal textarea { width: 100%; background: #0a0a0a; border: 1px solid #333; border-radius: 12px; padding: 12px 16px; color: var(--white); font-family: var(--font); font-size: 14px; outline: none; }
+    .modal input:focus, .modal select:focus, .modal textarea:focus { border-color: var(--iris); }
+    .modal textarea { resize: vertical; min-height: 80px; }
+    .modal select { appearance: none; cursor: pointer; }
+    .modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+
+    /* UPLOAD ZONE */
+    .upload-zone { border: 2px dashed #333; border-radius: 16px; padding: 32px; text-align: center; cursor: pointer; transition: all 0.25s; margin-top: 8px; }
+    .upload-zone:hover, .upload-zone.dragover { border-color: var(--iris); background: rgba(128,82,255,0.05); }
+    .upload-zone p { font-size: 14px; color: var(--ash); }
+    .upload-zone .icon { font-size: 32px; margin-bottom: 8px; }
+    .upload-preview { max-width: 100%; max-height: 200px; border-radius: 12px; margin-top: 12px; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 24px; right: 24px; z-index: 2000; background: #222; border: 1px solid #333; border-radius: 12px; padding: 14px 20px; font-size: 14px; opacity: 0; transform: translateY(10px); transition: all 0.3s; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { border-color: var(--verdant); }
+    .toast.error { border-color: #ef4444; }
+
+    /* EMPTY STATE */
+    .empty { text-align: center; padding: 48px; color: var(--ash); font-size: 14px; }
+
+    @media (max-width: 600px) {
+      .nav { padding: 18px 20px; }
+      .main { padding: 24px 20px; }
+      .auth-bar { flex-direction: column; }
+      .card { flex-direction: column; align-items: flex-start; }
+      .card-actions { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html">← 返回主页</a>
+      <h1>管理后台</h1>
+      <span>Admin</span>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-ghost" onclick="exportData()">导出数据</button>
+      <button class="btn btn-primary" id="publishBtn" onclick="publish()">发布到线上</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- AUTH -->
+    <div class="auth-bar">
+      <input type="password" id="tokenInput" placeholder="GitHub Personal Access Token">
+      <button class="btn btn-ghost btn-sm" onclick="saveToken()">保存</button>
+      <span class="auth-status" id="authStatus">未认证</span>
+    </div>
+
+    <!-- WORKS -->
+    <div class="section">
+      <div class="section-title">
+        <span>摄影作品</span>
+        <button class="btn btn-ghost btn-sm" onclick="openWorkModal()">+ 添加作品</button>
+      </div>
+      <div id="worksList"></div>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="section">
+      <div class="section-title">
+        <span>视频作品</span>
+        <button class="btn btn-ghost btn-sm" onclick="openVideoModal()">+ 添加视频</button>
+      </div>
+      <div id="videosList"></div>
+    </div>
+  </div>
+
+  <!-- WORK MODAL -->
+  <div class="modal-overlay" id="workModal">
+    <div class="modal">
+      <h2 id="workModalTitle">添加作品</h2>
+      <input type="hidden" id="workId">
+      <label>作品图片</label>
+      <div class="upload-zone" id="workUpload" onclick="document.getElementById('workFile').click()">
+        <div class="icon">📷</div>
+        <p>点击或拖拽上传图片</p>
+        <p style="font-size:12px;margin-top:4px;color:#555;">支持 JPG/PNG，自动压缩</p>
+      </div>
+      <input type="file" id="workFile" accept="image/*" style="display:none">
+      <img class="upload-preview" id="workPreview" style="display:none">
+      <label>标题</label>
+      <input type="text" id="workTitle" placeholder="作品标题">
+      <label>分类标签</label>
+      <input type="text" id="workTag" placeholder="如：摄影、街拍、风光">
+      <label>分类代码</label>
+      <select id="workCategory">
+        <option value="photo">摄影 Photography</option>
+        <option value="street">街拍 Street</option>
+        <option value="landscape">风光 Landscape</option>
+      </select>
+      <label>描述（可选）</label>
+      <textarea id="workDesc" placeholder="作品描述..."></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal('workModal')">取消</button>
+        <button class="btn btn-primary" onclick="saveWork()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal-overlay" id="videoModal">
+    <div class="modal">
+      <h2 id="videoModalTitle">添加视频</h2>
+      <input type="hidden" id="videoId">
+      <label>视频封面</label>
+      <div class="upload-zone" id="videoUpload" onclick="document.getElementById('videoFile').click()">
+        <div class="icon">🎬</div>
+        <p>点击或拖拽上传封面图</p>
+      </div>
+      <input type="file" id="videoFile" accept="image/*" style="display:none">
+      <img class="upload-preview" id="videoPreview" style="display:none">
+      <label>标题</label>
+      <input type="text" id="videoTitle" placeholder="视频标题">
+      <label>类型标签</label>
+      <input type="text" id="videoTag" placeholder="如：短片、纪录片、商业">
+      <label>视频链接</label>
+      <input type="text" id="videoUrl" placeholder="B站/YouTube 链接">
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal('videoModal')">取消</button>
+        <button class="btn btn-primary" onclick="saveVideo()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal" style="width:360px;text-align:center;">
+      <h2>确认删除？</h2>
+      <p style="color:var(--ash);margin-bottom:24px;">此操作不可撤销</p>
+      <div class="modal-actions" style="justify-content:center;">
+        <button class="btn btn-ghost" onclick="closeModal('deleteModal')">取消</button>
+        <button class="btn btn-danger" id="deleteConfirm">删除</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ===== CONFIG =====
+    const OWNER = 'yellowseac-debug';
+    const REPO = 'yellowseac-site';
+    const BRANCH = 'main';
+
+    // ===== STATE =====
+    let data = { works: [], videos: [] };
+    let pendingImages = {}; // { field: base64 }
+    let token = localStorage.getItem('gh_token') || '';
+
+    // ===== INIT =====
+    async function init() {
+      document.getElementById('tokenInput').value = token;
+      updateAuthStatus();
+      await loadData();
+      render();
+    }
+
+    function updateAuthStatus() {
+      const el = document.getElementById('authStatus');
+      if (token) {
+        el.textContent = '✓ 已认证';
+        el.className = 'auth-status ok';
+      } else {
+        el.textContent = '未认证';
+        el.className = 'auth-status';
+      }
+    }
+
+    function saveToken() {
+      token = document.getElementById('tokenInput').value.trim();
+      localStorage.setItem('gh_token', token);
+      updateAuthStatus();
+      toast(token ? 'Token 已保存' : 'Token 已清除', 'success');
+    }
+
+    // ===== DATA LOAD =====
+    async function loadData() {
+      try {
+        const res = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/works.json?t=${Date.now()}`);
+        if (res.ok) data = await res.json();
+      } catch (e) {
+        console.log('加载线上数据失败，使用本地数据');
+      }
+      if (!data.works) data.works = [];
+      if (!data.videos) data.videos = [];
+    }
+
+    // ===== RENDER =====
+    function render() {
+      renderWorks();
+      renderVideos();
+    }
+
+    function renderWorks() {
+      const el = document.getElementById('worksList');
+      if (!data.works.length) {
+        el.innerHTML = '<div class="empty">暂无作品，点击上方按钮添加</div>';
+        return;
+      }
+      el.innerHTML = data.works.map((w, i) => `
+        <div class="card" draggable="true" data-idx="${i}" data-type="work"
+             ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+          ${w.image ? `<img class="card-thumb" src="${w.image}" alt="${w.title}">` : `<div class="card-thumb-placeholder">无图</div>`}
+          <div class="card-info">
+            <div class="card-title">${w.title}</div>
+            <div class="card-meta">${w.tag} · ${w.category}${w.desc ? ' · ' + w.desc : ''}</div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-ghost btn-sm" onclick="editWork(${i})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="confirmDelete('work',${i})">删除</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderVideos() {
+      const el = document.getElementById('videosList');
+      if (!data.videos.length) {
+        el.innerHTML = '<div class="empty">暂无视频，点击上方按钮添加</div>';
+        return;
+      }
+      el.innerHTML = data.videos.map((v, i) => `
+        <div class="card" draggable="true" data-idx="${i}" data-type="video"
+             ondragstart="dragStart(event)" ondragover="dragOver(event)" ondrop="drop(event)">
+          ${v.thumb ? `<img class="card-thumb" src="${v.thumb}" alt="${v.title}">` : `<div class="card-thumb-placeholder">无封面</div>`}
+          <div class="card-info">
+            <div class="card-title">${v.title}</div>
+            <div class="card-meta">${v.tag}${v.url ? ' · ' + v.url.substring(0,40) + '...' : ''}</div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-ghost btn-sm" onclick="editVideo(${i})">编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="confirmDelete('video',${i})">删除</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ===== MODAL HELPERS =====
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); pendingImages = {}; }
+
+    // ===== WORK CRUD =====
+    function openWorkModal(idx) {
+      const isEdit = idx !== undefined;
+      document.getElementById('workModalTitle').textContent = isEdit ? '编辑作品' : '添加作品';
+      document.getElementById('workId').value = isEdit ? idx : '';
+      document.getElementById('workTitle').value = isEdit ? data.works[idx].title : '';
+      document.getElementById('workTag').value = isEdit ? data.works[idx].tag : '';
+      document.getElementById('workCategory').value = isEdit ? data.works[idx].category : 'photo';
+      document.getElementById('workDesc').value = isEdit ? (data.works[idx].desc || '') : '';
+      document.getElementById('workPreview').style.display = 'none';
+      document.getElementById('workUpload').style.display = '';
+      pendingImages = {};
+      openModal('workModal');
+    }
+
+    function editWork(idx) { openWorkModal(idx); }
+
+    async function saveWork() {
+      const idx = document.getElementById('workId').value;
+      const title = document.getElementById('workTitle').value.trim();
+      const tag = document.getElementById('workTag').value.trim();
+      const category = document.getElementById('workCategory').value;
+      const desc = document.getElementById('workDesc').value.trim();
+
+      if (!title) { toast('请输入标题', 'error'); return; }
+
+      let image = idx !== '' ? data.works[idx].image : '';
+
+      if (pendingImages.workImage) {
+        const filename = `images/work-${Date.now()}.jpg`;
+        await uploadFile(filename, pendingImages.workImage);
+        image = filename;
+      }
+
+      const work = { id: idx !== '' ? data.works[idx].id : 'w' + Date.now(), title, category, tag, image, desc };
+
+      if (idx !== '') {
+        data.works[idx] = work;
+      } else {
+        data.works.push(work);
+      }
+
+      pendingImages = {};
+      closeModal('workModal');
+      render();
+      toast('作品已保存', 'success');
+    }
+
+    // ===== VIDEO CRUD =====
+    function openVideoModal(idx) {
+      const isEdit = idx !== undefined;
+      document.getElementById('videoModalTitle').textContent = isEdit ? '编辑视频' : '添加视频';
+      document.getElementById('videoId').value = isEdit ? idx : '';
+      document.getElementById('videoTitle').value = isEdit ? data.videos[idx].title : '';
+      document.getElementById('videoTag').value = isEdit ? data.videos[idx].tag : '';
+      document.getElementById('videoUrl').value = isEdit ? (data.videos[idx].url || '') : '';
+      document.getElementById('videoPreview').style.display = 'none';
+      document.getElementById('videoUpload').style.display = '';
+      pendingImages = {};
+      openModal('videoModal');
+    }
+
+    function editVideo(idx) { openVideoModal(idx); }
+
+    async function saveVideo() {
+      const idx = document.getElementById('videoId').value;
+      const title = document.getElementById('videoTitle').value.trim();
+      const tag = document.getElementById('videoTag').value.trim();
+      const url = document.getElementById('videoUrl').value.trim();
+
+      if (!title) { toast('请输入标题', 'error'); return; }
+
+      let thumb = idx !== '' ? data.videos[idx].thumb : '';
+
+      if (pendingImages.videoThumb) {
+        const filename = `images/video-${Date.now()}.jpg`;
+        await uploadFile(filename, pendingImages.videoThumb);
+        thumb = filename;
+      }
+
+      const video = { id: idx !== '' ? data.videos[idx].id : 'v' + Date.now(), title, tag, thumb, url };
+
+      if (idx !== '') {
+        data.videos[idx] = video;
+      } else {
+        data.videos.push(video);
+      }
+
+      pendingImages = {};
+      closeModal('videoModal');
+      render();
+      toast('视频已保存', 'success');
+    }
+
+    // ===== DELETE =====
+    let deleteTarget = null;
+    function confirmDelete(type, idx) {
+      deleteTarget = { type, idx };
+      openModal('deleteModal');
+      document.getElementById('deleteConfirm').onclick = () => {
+        if (deleteTarget.type === 'work') data.works.splice(deleteTarget.idx, 1);
+        else data.videos.splice(deleteTarget.idx, 1);
+        closeModal('deleteModal');
+        render();
+        toast('已删除', 'success');
+      };
+    }
+
+    // ===== IMAGE UPLOAD =====
+    function setupUpload(zoneId, fileInputId, previewId, field) {
+      const zone = document.getElementById(zoneId);
+      const input = document.getElementById(fileInputId);
+      const preview = document.getElementById(previewId);
+
+      zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+      zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+      zone.addEventListener('drop', e => {
+        e.preventDefault(); zone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) handleImageFile(e.dataTransfer.files[0], preview, zone, field);
+      });
+      input.addEventListener('change', () => {
+        if (input.files.length) handleImageFile(input.files[0], preview, zone, field);
+      });
+    }
+
+    function handleImageFile(file, preview, zone, field) {
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const compressed = await compressImage(e.target.result);
+        pendingImages[field] = compressed;
+        preview.src = compressed;
+        preview.style.display = 'block';
+        zone.style.display = 'none';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function compressImage(dataUrl, maxKB = 500) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let { width, height } = img;
+          const maxDim = 1600;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) { height = height / width * maxDim; width = maxDim; }
+            else { width = width / height * maxDim; height = maxDim; }
+          }
+          canvas.width = width; canvas.height = height;
+          canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+          let quality = 0.8;
+          const tryCompress = () => {
+            canvas.toBlob(blob => {
+              if (blob.size <= maxKB * 1000 || quality <= 0.3) {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.readAsDataURL(blob);
+              } else {
+                quality -= 0.1;
+                tryCompress();
+              }
+            }, 'image/jpeg', quality);
+          };
+          tryCompress();
+        };
+        img.src = dataUrl;
+      });
+    }
+
+    // ===== GITHUB API =====
+    async function uploadFile(path, base64Data) {
+      if (!token) { toast('请先输入 GitHub Token', 'error'); return false; }
+      const content = base64Data.split(',')[1];
+      // Check if file exists to get SHA
+      let sha = null;
+      try {
+        const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+          headers: { 'Authorization': `token ${token}` }
+        });
+        if (res.ok) { const data = await res.json(); sha = data.sha; }
+      } catch (e) {}
+
+      const body = { message: `upload ${path}`, content, branch: BRANCH };
+      if (sha) body.sha = sha;
+
+      const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}`, {
+        method: 'PUT',
+        headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      return res.ok;
+    }
+
+    async function publish() {
+      if (!token) { toast('请先输入 GitHub Token', 'error'); return; }
+      const btn = document.getElementById('publishBtn');
+      btn.textContent = '发布中...';
+      btn.disabled = true;
+
+      try {
+        // Get current works.json SHA
+        let sha = null;
+        try {
+          const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/works.json`, {
+            headers: { 'Authorization': `token ${token}` }
+          });
+          if (res.ok) { const d = await res.json(); sha = d.sha; }
+        } catch (e) {}
+
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+        const body = { message: 'update works.json via admin', content, branch: BRANCH };
+        if (sha) body.sha = sha;
+
+        const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/works.json`, {
+          method: 'PUT',
+          headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        if (res.ok) {
+          toast('✓ 已发布！约1-2分钟后生效', 'success');
+        } else {
+          const err = await res.json();
+          toast('发布失败: ' + (err.message || '未知错误'), 'error');
+        }
+      } catch (e) {
+        toast('网络错误: ' + e.message, 'error');
+      }
+
+      btn.textContent = '发布到线上';
+      btn.disabled = false;
+    }
+
+    // ===== DRAG & DROP SORT =====
+    let dragIdx = null, dragType = null;
+    function dragStart(e) {
+      dragIdx = parseInt(e.currentTarget.dataset.idx);
+      dragType = e.currentTarget.dataset.type;
+      e.dataTransfer.effectAllowed = 'move';
+    }
+    function dragOver(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; }
+    function drop(e) {
+      e.preventDefault();
+      const toIdx = parseInt(e.currentTarget.dataset.idx);
+      const toType = e.currentTarget.dataset.type;
+      if (dragType !== toType || dragIdx === toIdx) return;
+      const arr = dragType === 'work' ? data.works : data.videos;
+      const [item] = arr.splice(dragIdx, 1);
+      arr.splice(toIdx, 0, item);
+      render();
+      toast('顺序已调整', 'success');
+    }
+
+    // ===== EXPORT =====
+    function exportData() {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'works.json'; a.click();
+      URL.revokeObjectURL(url);
+      toast('数据已导出', 'success');
+    }
+
+    // ===== TOAST =====
+    function toast(msg, type = '') {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.className = 'toast show ' + type;
+      setTimeout(() => el.className = 'toast', 3000);
+    }
+
+    // ===== SETUP =====
+    setupUpload('workUpload', 'workFile', 'workPreview', 'workImage');
+    setupUpload('videoUpload', 'videoFile', 'videoPreview', 'videoThumb');
+
+    // Close modal on overlay click
+    document.querySelectorAll('.modal-overlay').forEach(el => {
+      el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+    });
+
+    init();
+  </script>
+</body>
+</html>

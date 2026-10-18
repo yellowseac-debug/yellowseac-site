@@ -227,48 +227,14 @@
     <p class="section-label">作品</p>
     <h2 class="section-headline">精选作品。</h2>
 
-    <div class="gallery-grid" id="galleryGrid">
-      <div class="gallery-item" data-cat="photo" data-title="无题 I" data-tag="摄影">
-        <img data-src="images/photo-01.jpg" alt="无题 I" loading="lazy">
-        <div class="gallery-overlay"><p class="gallery-overlay-tag">摄影</p><p class="gallery-overlay-title">无题 I</p></div>
-      </div>
-      <div class="gallery-item" data-cat="photo" data-title="无题 II" data-tag="摄影">
-        <img data-src="images/photo-02.jpg" alt="无题 II" loading="lazy">
-        <div class="gallery-overlay"><p class="gallery-overlay-tag">摄影</p><p class="gallery-overlay-title">无题 II</p></div>
-      </div>
-      <div class="gallery-item" data-cat="photo" data-title="无题 III" data-tag="摄影">
-        <img data-src="images/photo-03.jpg" alt="无题 III" loading="lazy">
-        <div class="gallery-overlay"><p class="gallery-overlay-tag">摄影</p><p class="gallery-overlay-title">无题 III</p></div>
-      </div>
-    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
   </section>
 
   <!-- VIDEO -->
   <section class="section section-gap" id="video">
     <p class="section-label">视频</p>
     <h2 class="section-headline">动态作品。</h2>
-    <div class="video-grid">
-      <div class="video-card" data-video="https://www.youtube.com/embed/你的视频ID1">
-        <img src="images/video-thumb-01.jpg" alt="城市独白">
-        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
-        <div class="video-info"><p class="video-info-tag">短片</p><p class="video-info-title">城市独白</p></div>
-      </div>
-      <div class="video-card" data-video="https://www.youtube.com/embed/你的视频ID2">
-        <img src="images/video-thumb-02.jpg" alt="帧与帧之间">
-        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
-        <div class="video-info"><p class="video-info-tag">纪录片</p><p class="video-info-title">帧与帧之间</p></div>
-      </div>
-      <div class="video-card" data-video="https://www.youtube.com/embed/你的视频ID3">
-        <img src="images/video-thumb-03.jpg" alt="色彩漂流">
-        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
-        <div class="video-info"><p class="video-info-tag">音乐视频</p><p class="video-info-title">色彩漂流</p></div>
-      </div>
-      <div class="video-card" data-video="https://www.youtube.com/embed/你的视频ID4">
-        <img src="images/video-thumb-04.jpg" alt="静止中的运动">
-        <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
-        <div class="video-info"><p class="video-info-tag">商业</p><p class="video-info-title">静止中的运动</p></div>
-      </div>
-    </div>
+    <div class="video-grid" id="videoGrid"></div>
   </section>
 
   <!-- CONTACT -->
@@ -356,114 +322,152 @@
       init(); draw();
     })();
 
-    // ===== LAZY LOAD =====
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          const img = e.target;
-          img.src = img.dataset.src;
-          img.onload = () => img.parentElement.classList.add('visible');
-          observer.unobserve(img);
-        }
-      });
-    }, { rootMargin: '200px' });
-    document.querySelectorAll('.gallery-item img[data-src]').forEach(img => observer.observe(img));
+    // ===== LOAD WORKS DATA =====
+    const OWNER = 'yellowseac-debug';
+    const REPO = 'yellowseac-site';
 
-    // ===== FILTERS =====
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.gallery-item');
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.dataset.filter;
-        items.forEach(item => {
-          if (cat === 'all' || item.dataset.cat === cat) {
-            item.classList.remove('hidden');
-            item.classList.add('visible');
-          } else {
-            item.classList.add('hidden');
-            item.classList.remove('visible');
+    async function loadWorks() {
+      let data;
+      try {
+        const res = await fetch(`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/works.json?t=${Date.now()}`);
+        if (res.ok) data = await res.json();
+      } catch (e) {}
+      if (!data || !data.works) data = { works: [], videos: [] };
+
+      // Render gallery
+      const galleryGrid = document.getElementById('galleryGrid');
+      galleryGrid.innerHTML = data.works.map((w, i) => `
+        <div class="gallery-item" data-cat="${w.category}" data-title="${w.title}" data-tag="${w.tag}" data-idx="${i}">
+          <img data-src="${w.image}" alt="${w.title}" loading="lazy">
+          <div class="gallery-overlay"><p class="gallery-overlay-tag">${w.tag}</p><p class="gallery-overlay-title">${w.title}</p></div>
+        </div>
+      `).join('');
+
+      // Render videos
+      const videoGrid = document.getElementById('videoGrid');
+      videoGrid.innerHTML = data.videos.filter(v => v.url).map(v => `
+        <div class="video-card" data-video="${v.url}">
+          ${v.thumb ? `<img src="${v.thumb}" alt="${v.title}">` : `<div style="width:100%;height:100%;background:#111;display:flex;align-items:center;justify-content:center;color:#555;">暂无封面</div>`}
+          <div class="video-play"><svg viewBox="0 0 24 24"><polygon points="8,5 20,12 8,19"/></svg></div>
+          <div class="video-info"><p class="video-info-tag">${v.tag}</p><p class="video-info-title">${v.title}</p></div>
+        </div>
+      `).join('');
+
+      // Setup lazy load
+      setupLazyLoad();
+      // Setup lightbox
+      setupLightbox(data.works);
+    }
+
+    // ===== LAZY LOAD =====
+    function setupLazyLoad() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const img = e.target;
+            img.src = img.dataset.src;
+            img.onload = () => img.parentElement.classList.add('visible');
+            observer.unobserve(img);
           }
         });
-      });
-    });
+      }, { rootMargin: '200px' });
+      document.querySelectorAll('.gallery-item img[data-src]').forEach(img => observer.observe(img));
+    }
 
     // ===== LIGHTBOX =====
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbTitle = document.getElementById('lbTitle');
-    const lbTag = document.getElementById('lbTag');
-    let lbIndex = 0, visibleItems = [];
+    function setupLightbox(worksData) {
+      const lb = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImg');
+      const lbTitle = document.getElementById('lbTitle');
+      const lbTag = document.getElementById('lbTag');
+      let lbIndex = 0, visibleItems = [];
 
-    function getVisibleItems() {
-      return Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+      function getVisibleItems() {
+        return Array.from(document.querySelectorAll('.gallery-item:not(.hidden)'));
+      }
+
+      function openLB(idx) {
+        visibleItems = getVisibleItems();
+        lbIndex = idx;
+        showLB();
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function showLB() {
+        const item = visibleItems[lbIndex];
+        if (!item) return;
+        lbImg.src = item.querySelector('img').dataset.src || item.querySelector('img').src;
+        lbTitle.textContent = item.dataset.title;
+        lbTag.textContent = item.dataset.tag;
+      }
+
+      function closeLB() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function navLB(dir) {
+        lbIndex = (lbIndex + dir + visibleItems.length) % visibleItems.length;
+        showLB();
+      }
+
+      // Bind click events
+      document.querySelectorAll('.gallery-item').forEach((item, i) => {
+        item.addEventListener('click', () => openLB(i));
+      });
+
+      document.getElementById('lbClose').onclick = closeLB;
+      document.getElementById('lbPrev').onclick = () => navLB(-1);
+      document.getElementById('lbNext').onclick = () => navLB(1);
+      lb.onclick = e => { if (e.target === lb) closeLB(); };
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLB();
+        if (e.key === 'ArrowLeft') navLB(-1);
+        if (e.key === 'ArrowRight') navLB(1);
+      });
+
+      // Touch swipe
+      let touchStartX = 0;
+      lb.ontouchstart = e => { touchStartX = e.touches[0].clientX; };
+      lb.ontouchend = e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) navLB(diff > 0 ? 1 : -1);
+      };
     }
-
-    function openLB(idx) {
-      visibleItems = getVisibleItems();
-      lbIndex = idx;
-      showLB();
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function showLB() {
-      const item = visibleItems[lbIndex];
-      if (!item) return;
-      lbImg.src = item.querySelector('img').dataset.src || item.querySelector('img').src;
-      lbTitle.textContent = item.dataset.title;
-      lbTag.textContent = item.dataset.tag;
-    }
-
-    function closeLB() {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    function navLB(dir) {
-      lbIndex = (lbIndex + dir + visibleItems.length) % visibleItems.length;
-      showLB();
-    }
-
-    items.forEach((item, i) => item.addEventListener('click', () => openLB(i)));
-    document.getElementById('lbClose').addEventListener('click', closeLB);
-    document.getElementById('lbPrev').addEventListener('click', () => navLB(-1));
-    document.getElementById('lbNext').addEventListener('click', () => navLB(1));
-    lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
-    document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLB();
-      if (e.key === 'ArrowLeft') navLB(-1);
-      if (e.key === 'ArrowRight') navLB(1);
-    });
-
-    // Touch swipe
-    let touchStartX = 0;
-    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-    lb.addEventListener('touchend', e => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) navLB(diff > 0 ? 1 : -1);
-    });
 
     // ===== VIDEO EMBED =====
-    document.querySelectorAll('.video-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const url = card.dataset.video;
-        const iframe = document.createElement('iframe');
-        iframe.src = url + '?autoplay=1';
-        iframe.style.cssText = 'width:100%;height:100%;border:none;';
-        iframe.allow = 'autoplay; encrypted-media';
-        iframe.allowFullscreen = true;
-        card.innerHTML = '';
-        card.appendChild(iframe);
+    function setupVideoEmbed() {
+      document.querySelectorAll('.video-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const url = card.dataset.video;
+          if (!url) return;
+          const iframe = document.createElement('iframe');
+          // Handle Bilibili URLs differently
+          if (url.includes('bilibili.com')) {
+            iframe.src = url;
+          } else {
+            iframe.src = url + (url.includes('?') ? '&' : '?') + 'autoplay=1';
+          }
+          iframe.style.cssText = 'width:100%;height:100%;border:none;';
+          iframe.allow = 'autoplay; encrypted-media';
+          iframe.allowFullscreen = true;
+          card.innerHTML = '';
+          card.appendChild(iframe);
+        });
       });
-    });
+    }
 
     // ===== NAV SCROLL =====
     const nav = document.getElementById('nav');
     addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', scrollY > 80);
+    });
+
+    // ===== INIT =====
+    loadWorks().then(() => {
+      setupVideoEmbed();
     });
   </script>
 
