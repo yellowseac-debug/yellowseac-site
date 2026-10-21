@@ -53,6 +53,41 @@
       "tag": "产品视频",
       "thumb": "images/video-thumb-04.jpg",
       "url": "images/手机贴膜.mp4"
+    },
+    {
+      "id": "v5",
+      "title": "港风",
+      "tag": "氛围感",
+      "thumb": "images/video-thumb-05.jpg",
+      "url": "images/港风.mp4"
+    },
+    {
+      "id": "v6",
+      "title": "港风氛围感",
+      "tag": "氛围感",
+      "thumb": "images/video-thumb-06.jpg",
+      "url": "images/港风氛围感.mp4"
+    },
+    {
+      "id": "v7",
+      "title": "自制短片",
+      "tag": "短片",
+      "thumb": "images/video-thumb-07.jpg",
+      "url": "images/自制短片.mp4"
+    },
+    {
+      "id": "v8",
+      "title": "自制短片 2",
+      "tag": "短片",
+      "thumb": "images/video-thumb-08.jpg",
+      "url": "images/自制短片2.mp4"
+    },
+    {
+      "id": "v9",
+      "title": "酷辣氛围感",
+      "tag": "氛围感",
+      "thumb": "images/video-thumb-09.jpg",
+      "url": "images/酷辣氛围感.mp4"
     }
   ]
 }
