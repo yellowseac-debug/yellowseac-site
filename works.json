@@ -63,6 +63,20 @@
       "tag": "氛围感",
       "thumb": "images/video-thumb-09.jpg",
       "url": "images/酷辣氛围感.mp4"
+    },
+    {
+      "id": "v10",
+      "title": "Vlog好物分享",
+      "tag": "Vlog",
+      "thumb": "images/video-thumb-10.jpg",
+      "url": "images/vlog好物分享.mp4"
+    },
+    {
+      "id": "v11",
+      "title": "广告信息流",
+      "tag": "广告视频",
+      "thumb": "images/video-thumb-11.jpg",
+      "url": "images/广告信息流.mp4"
     }
   ]
 }
