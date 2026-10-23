@@ -77,6 +77,34 @@
       "tag": "广告视频",
       "thumb": "images/video-thumb-11.jpg",
       "url": "images/广告信息流.mp4"
+    },
+    {
+      "id": "v12",
+      "title": "绝世的容颜氛围感",
+      "tag": "氛围感",
+      "thumb": "images/video-thumb-12.jpg",
+      "url": "images/博主绝世的容颜氛围感.mp4"
+    },
+    {
+      "id": "v13",
+      "title": "AI 毛绒公仔",
+      "tag": "AI 创作",
+      "thumb": "images/video-thumb-13.jpg",
+      "url": "images/微信视频2026-10-23_170559_074.mp4"
+    },
+    {
+      "id": "v14",
+      "title": "ins 风情侣 Vlog",
+      "tag": "Vlog",
+      "thumb": "images/video-thumb-14.jpg",
+      "url": "images/ins风情侣vlog.mp4"
+    },
+    {
+      "id": "v15",
+      "title": "创意转场",
+      "tag": "转场特效",
+      "thumb": "images/video-thumb-15.jpg",
+      "url": "images/转场video.mp4"
     }
   ]
 }
