@@ -48,6 +48,20 @@
       "category": "人像",
       "tag": "酷辣人像",
       "image": "images/photo-08.jpg"
+    },
+    {
+      "id": "p9",
+      "title": "平头化妆刷产品图",
+      "category": "产品",
+      "tag": "产品图",
+      "image": "images/photo-09.jpg"
+    },
+    {
+      "id": "p10",
+      "title": "日系清新写真",
+      "category": "人像",
+      "tag": "日系人像",
+      "image": "images/photo-10.jpg"
     }
   ],
   "videos": [
