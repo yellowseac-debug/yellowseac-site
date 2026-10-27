@@ -3,7 +3,7 @@
     {
       "id": "p1",
       "title": "中式秀禾婚礼",
-      "category": "婚礼",
+      "category": "人像",
       "tag": "婚礼跟拍",
       "image": "images/photo-01.jpg"
     },
@@ -74,8 +74,8 @@
   "videos": [
     {
       "id": "v1",
-      "title": "室内舞蹈",
-      "tag": "舞蹈",
+      "title": "AI 转场",
+      "tag": "AI 创作",
       "thumb": "images/video-thumb-01.jpg",
       "url": "images/温馨室内男子动感舞蹈视频.mp4"
     },
