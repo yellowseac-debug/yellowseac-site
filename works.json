@@ -190,6 +190,13 @@
       "tag": "AI 创作",
       "thumb": "images/video-thumb-17.jpg",
       "url": "images/AI动漫氛围感.mp4"
+    },
+    {
+      "id": "v18",
+      "title": "数码 3D 拆解演示",
+      "tag": "视觉特效",
+      "thumb": "images/video-thumb-18.jpg",
+      "url": "images/数码3D拆解演示.mp4"
     }
   ]
 }
