@@ -197,6 +197,20 @@
       "tag": "视觉特效",
       "thumb": "images/video-thumb-18.jpg",
       "url": "images/数码3D拆解演示.mp4"
+    },
+    {
+      "id": "v19",
+      "title": "生活碎片",
+      "tag": "氛围感",
+      "thumb": "images/video-thumb-19.jpg",
+      "url": "images/生活碎片.mp4"
+    },
+    {
+      "id": "v20",
+      "title": "pieces of hong kong",
+      "tag": "氛围感",
+      "thumb": "images/video-thumb-20.jpg",
+      "url": "images/pieces of hong kong.mp4"
     }
   ]
 }
