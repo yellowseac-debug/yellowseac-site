@@ -211,6 +211,20 @@
       "tag": "氛围感",
       "thumb": "images/video-thumb-20.jpg",
       "url": "images/pieces of hong kong.mp4"
+    },
+    {
+      "id": "v21",
+      "title": "埃及口播试剪",
+      "tag": "口播",
+      "thumb": "images/video-thumb-21.jpg",
+      "url": "images/埃及口播试剪.mp4"
+    },
+    {
+      "id": "v22",
+      "title": "商业口播",
+      "tag": "口播",
+      "thumb": "images/video-thumb-22.jpg",
+      "url": "images/商业口播.mp4"
     }
   ]
 }
