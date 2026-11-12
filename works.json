@@ -74,17 +74,17 @@
   "videos": [
     {
       "id": "v1",
-      "title": "AI 转场",
+      "title": "AI特效",
       "tag": "AI 创作",
       "thumb": "images/video-thumb-01.jpg",
-      "url": "images/温馨室内男子动感舞蹈视频.mp4"
+      "url": "images/AI特效.mp4"
     },
     {
       "id": "v2",
-      "title": "液态金属变宝马跑车",
+      "title": "AI特效2",
       "tag": "视觉特效",
       "thumb": "images/video-thumb-02.jpg",
-      "url": "images/地下车库液态金属变宝马跑车.mp4"
+      "url": "images/AI特效2.mp4"
     },
     {
       "id": "v3",
@@ -95,24 +95,24 @@
     },
     {
       "id": "v4",
-      "title": "手机贴膜",
+      "title": "AI产品宣传（手机膜）",
       "tag": "产品视频",
       "thumb": "images/video-thumb-04.jpg",
-      "url": "images/手机贴膜.mp4"
+      "url": "images/AI产品宣传（手机膜）.mp4"
     },
     {
       "id": "v5",
-      "title": "港风",
+      "title": "人像港风氛围感",
       "tag": "氛围感",
       "thumb": "images/video-thumb-05.jpg",
-      "url": "images/港风.mp4"
+      "url": "images/人像港风氛围感.mp4"
     },
     {
       "id": "v6",
-      "title": "港风氛围感",
+      "title": "人像港风氛围感2",
       "tag": "氛围感",
       "thumb": "images/video-thumb-06.jpg",
-      "url": "images/港风氛围感.mp4"
+      "url": "images/人像港风氛围感2.mp4"
     },
     {
       "id": "v7",
@@ -130,10 +130,10 @@
     },
     {
       "id": "v9",
-      "title": "酷辣氛围感",
+      "title": "人像酷炫氛围感",
       "tag": "氛围感",
       "thumb": "images/video-thumb-09.jpg",
-      "url": "images/酷辣氛围感.mp4"
+      "url": "images/人像酷炫氛围感.mp4"
     },
     {
       "id": "v10",
@@ -151,16 +151,16 @@
     },
     {
       "id": "v12",
-      "title": "绝世的容颜氛围感",
+      "title": "港风复古氛围感（博主）",
       "tag": "氛围感",
       "thumb": "images/video-thumb-12.jpg",
-      "url": "images/博主绝世的容颜氛围感.mp4"
+      "url": "images/港风复古氛围感（博主）.mp4"
     },
     {
       "id": "v13",
       "title": "AI 毛绒公仔",
       "tag": "AI 创作",
-      "thumb": "images/video-thumb-13.jpg",
+      "thumb": "images/Ai产品广告.jpg",
       "url": "images/微信视频2026-10-23_170559_074.mp4"
     },
     {
@@ -172,24 +172,17 @@
     },
     {
       "id": "v15",
-      "title": "创意转场",
+      "title": "抖音热门视频仿拍",
       "tag": "转场特效",
       "thumb": "images/video-thumb-15.jpg",
-      "url": "images/转场video.mp4"
+      "url": "images/抖音热门视频仿拍.mp4"
     },
     {
       "id": "v16",
-      "title": "羽绒服广告",
+      "title": "AI产品广告",
       "tag": "产品视频",
       "thumb": "images/video-thumb-16.jpg",
-      "url": "images/4K清洁羽绒服视频.mp4"
-    },
-    {
-      "id": "v17",
-      "title": "AI 动漫氛围感",
-      "tag": "AI 创作",
-      "thumb": "images/video-thumb-17.jpg",
-      "url": "images/AI动漫氛围感.mp4"
+      "url": "images/AI产品广告.mp4"
     },
     {
       "id": "v18",
@@ -200,17 +193,17 @@
     },
     {
       "id": "v19",
-      "title": "生活碎片",
+      "title": "混剪",
       "tag": "氛围感",
       "thumb": "images/video-thumb-19.jpg",
-      "url": "images/生活碎片.mp4"
+      "url": "images/混剪.mp4"
     },
     {
       "id": "v20",
-      "title": "pieces of hong kong",
+      "title": "混剪2",
       "tag": "氛围感",
       "thumb": "images/video-thumb-20.jpg",
-      "url": "images/pieces of hong kong.mp4"
+      "url": "images/混剪2.mp4"
     },
     {
       "id": "v21",
