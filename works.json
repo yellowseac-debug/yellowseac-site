@@ -137,17 +137,17 @@
     },
     {
       "id": "v10",
-      "title": "Vlog好物分享",
+      "title": "网感好物分享",
       "tag": "Vlog",
       "thumb": "images/video-thumb-10.jpg",
-      "url": "images/vlog好物分享.mp4"
+      "url": "images/网感好物分享.mp4"
     },
     {
       "id": "v11",
-      "title": "广告信息流",
+      "title": "产品推广",
       "tag": "广告视频",
       "thumb": "images/video-thumb-11.jpg",
-      "url": "images/广告信息流.mp4"
+      "url": "images/产品推广.mp4"
     },
     {
       "id": "v12",
@@ -207,10 +207,10 @@
     },
     {
       "id": "v21",
-      "title": "埃及口播试剪",
+      "title": "旅游类口播",
       "tag": "口播",
       "thumb": "images/video-thumb-21.jpg",
-      "url": "images/埃及口播试剪.mp4"
+      "url": "images/旅游类口播.mp4"
     },
     {
       "id": "v22",
